@@ -22,6 +22,36 @@ function success(position){
 }
 const btn = document.getElementById('getWeatherBtn');
 btn.addEventListener("click", function(){
+
+  // ----------------- CURRENT ----------------- (xhr)
+  const xhr = new XMLHttpRequest(); // Defines the XMLHttp object
+  xhr.open("GET", `localhost:3000/weather/${latitude}/${longitude}`); // opens a get request to the website
+  xhr.send(); // sends the request
+
+  xhr.onload() = function(){ // Once we get a response
+    const body = JSON.parse(xhr.responseText); // Set body to the response text
+    let temperature = body.temperature; // Parse the temperature from the response
+    let weatherStatus = body.weatherStatus; // Parse the weatherStatus from the response
+    document.getElementById('temperature').innerHTML = `Temperature: ${temperature} F`; // Set the temperature HTML text to the temperature
+    document.getElementById('weatherStatus').innerHTML = `weatherStatus: ${weatherStatus}`; // Set the weatherStatus HTML text to the weatherStatus
+  }
+
+  // ----------------- 5-DAY FORECAST ----------------- (xhr2)
+
+  const xhr2 = new XMLHttpRequest(); // Defines the XMLHttp object
+  xhr2.open("GET", `localhost:3000/forecast/${latitude}/${longitude}`); // opens a get request to the website
+  xhr2.send(); // sends the request
+
+  xhr2.onload() = function(){ // Once we get a response
+    const body = JSON.parse(xhr2.responseText);
+    let forecast = body.forecast; // Parse the forecast from the response, we now have a list of 5 day/temperature pairs
+    // forecast = [{Monday: 52}, {Tuesday: 53}, {Wednesday: 54}, {Thursday: 55}, {Friday: 56}}]
+    let forecastElements = document.getElementsByClassName("forecast"); // Setting forecastElements to an array of divs with the class 'forecast' (5 in this case): [first div, second div, third div]
+    for (let i = 0; i < forecast.length; i++){
+      // Code here
+    }
+  }
+
   var forecast = [["M", 52], ["Tu", 53], ["W", 54], ["Th", 55], ["F", 56]] // Nested array of predefined day/forecast pairs
   var forecastElements = document.getElementsByClassName("forecast"); // Setting forecastElements to an array of divs with the class 'forecast' (5 in this case): [first div, second div, third div]
   for (var i = 0; i < forecast.length; i++) { // For loop that goes from the 0th index to the length - 1 index
