@@ -49,7 +49,7 @@ btn.addEventListener("click", function(){
     // forecast = [{Monday: 52}, {Tuesday: 53}, {Wednesday: 54}, {Thursday: 55}, {Friday: 56}}]
     let forecastElements = document.getElementsByClassName("forecast"); // Setting forecastElements to an array of divs with the class 'forecast' (5 in this case): [first div, second div, third div]
     for (let i = 0; i < forecast.length; i++){
-      forecastElements[i].innerHTML = forecast[i].dayName + ": " + forecast[i].temp + "°F";
+      forecastElements[i].innerHTML = forecast[i].dayName + ": " + forecast[i].temp + "\u00B0F";
     }
   }
 })
