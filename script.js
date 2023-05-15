@@ -25,10 +25,11 @@ btn.addEventListener("click", function(){
 
   // ----------------- CURRENT ----------------- (xhr)
   const xhr = new XMLHttpRequest(); // Defines the XMLHttp object
-  xhr.open("GET", `localhost:3000/weather/${latitude}/${longitude}`); // opens a get request to the website
+  xhr.open("GET", `http://localhost:3000/weather/${latitude}/${longitude}`); // opens a get request to the website
   xhr.send(); // sends the request
 
   xhr.onload() = function(){ // Once we get a response
+    // Body will look like this: {temperature: 52, weatherStatus: "Clouds"}
     const body = JSON.parse(xhr.responseText); // Set body to the response text
     let temperature = body.temperature; // Parse the temperature from the response
     let weatherStatus = body.weatherStatus; // Parse the weatherStatus from the response
@@ -39,7 +40,7 @@ btn.addEventListener("click", function(){
   // ----------------- 5-DAY FORECAST ----------------- (xhr2)
 
   const xhr2 = new XMLHttpRequest(); // Defines the XMLHttp object
-  xhr2.open("GET", `localhost:3000/forecast/${latitude}/${longitude}`); // opens a get request to the website
+  xhr2.open("GET", `http://localhost:3000/forecast/${latitude}/${longitude}`); // opens a get request to the website
   xhr2.send(); // sends the request
 
   xhr2.onload() = function(){ // Once we get a response
